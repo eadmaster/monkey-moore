@@ -44,7 +44,11 @@ class monkeymoore_error : public std::exception
 {
 public:
    monkeymoore_error (const wxString &msg, int errorId) :
+#ifdef _WIN32
       std::exception(msg.c_str()), m_errorId(errorId) { }
+#else
+      std::exception() {}
+#endif
 
    int code () const { return m_errorId; }
 
